@@ -59,7 +59,8 @@ HANGMANPICS = ['''
  / \  |
       |
 =========''']
-words = 'ant baboon badger bat bear beaver camel cat clam cobra cougar coyote crow deer dog donkey duck eagle ferret fox frog goat goose hawk lion lizard llama mole monkey moose mouse mule newt otter owl panda parrot pigeon python rabbit ram rat raven rhino salmon seal shark sheep skunk sloth snake spider stork swan tiger toad trout turkey turtle weasel whale wolf wombat zebra'.split()
+file = open('test.txt','r')
+words = file.read().split()
 
 def getRandomWord(wordList):
     # This function returns a random string from the passed list of strings.
@@ -123,7 +124,7 @@ def checkWrongAnswer(missedLetters, secretWord):
             
 def main():
     """Main application entry point."""
-    print('H A N G M A N',' by 035025')
+    print('H A N G M A N',' by Choi-young-jae')
     missedLetters = ''
     correctLetters = ''
     gameSucceeded = False
