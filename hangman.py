@@ -59,8 +59,10 @@ HANGMANPICS = ['''
  / \  |
       |
 =========''']
-file = open('test.txt','r')
-words = file.read().split()
+def readWordList:
+  file = open('test.txt','r')
+  words = file.read().split()
+  return words
 
 def getRandomWord(wordList):
     # This function returns a random string from the passed list of strings.
@@ -129,6 +131,7 @@ def main():
     correctLetters = ''
     gameSucceeded = False
     gameFailed = False
+    words = readWordList()
     secretWord = getRandomWord(words)
 
     while True:
