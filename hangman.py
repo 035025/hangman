@@ -59,7 +59,7 @@ HANGMANPICS = ['''
  / \  |
       |
 =========''']
-def readWordList:
+def readWordList():
   file = open('test.txt','r')
   words = file.read().split()
   return words
