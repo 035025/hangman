@@ -62,7 +62,23 @@ HANGMANPICS = ['''
 def readWordList():
   file = open('test.txt','r')
   words = file.read().split()
+  file.close()
   return words
+def readScore():
+    file = open('score.txt','r')
+    highscore = file.read()
+    print("-"*50)
+    if highscore == '' :
+        highscore = 0
+
+    print("Current high score is ",highscore)
+    print("-"*50)
+    file.close()
+    return int(highscore)
+def changeScore(newscore):
+    file = open('score.txt','w')
+    file.write(str(newscore))
+    file.close()
 
 def getRandomWord(wordList):
     # This function returns a random string from the passed list of strings.
@@ -126,7 +142,10 @@ def checkWrongAnswer(missedLetters, secretWord):
             
 def main():
     """Main application entry point."""
+
     print('H A N G M A N',' by 035025')
+    currentscore = readScore()
+    gamescore = 0
     missedLetters = ''
     correctLetters = ''
     gameSucceeded = False
@@ -138,6 +157,9 @@ def main():
         displayBoard(HANGMANPICS, missedLetters, correctLetters, secretWord)
 
         if gameSucceeded or gameFailed:
+            if gamescore > currentscore:
+                print("New high score is ",gamescore)
+                changeScore(gamescore)
             if gameSucceeded:
                 print('Yes! The secret word is "' + secretWord + '"! You have won!')
             else:
@@ -147,6 +169,7 @@ def main():
             if playAgain():
                 missedLetters = ''
                 correctLetters = ''
+                gamescore = 0
                 gameSucceeded = False
                 gameFailed = False
                 secretWord = getRandomWord(words)
@@ -157,6 +180,7 @@ def main():
         # Let the player type in a letter.
         guess = getGuess(missedLetters + correctLetters)
         if guess in secretWord:
+            gamescore += 10
             correctLetters = correctLetters + guess
             gameSucceeded = checkCorrectAnswer(correctLetters, secretWord)
         else:
